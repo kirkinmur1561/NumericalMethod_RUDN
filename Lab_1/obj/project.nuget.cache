@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Jmto4jg4h/AGeQBMet1YtC6HnBK/FIpr8sERmOA3CjjbGmZtdsJt9/u2b0VtC3JuMkV/Iy5YU71E17Dary6VCg==",
+  "success": true,
+  "projectFilePath": "S:\\ReposProject\\NumericalMethod_RUDN\\Lab_1\\Lab_1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Кирилл\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.12\\microsoft.netcore.app.host.win-x64.5.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}
