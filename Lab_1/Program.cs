@@ -6,7 +6,6 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
-using Microsoft.VisualBasic;
 
 namespace Lab_1
 {
@@ -15,7 +14,7 @@ namespace Lab_1
         /// <summary>
         /// Константа округления
         /// </summary>
-        private const int digits = 5;
+        private const int Digits = 5;
         
         /// <summary>
         /// Константа шага
@@ -25,102 +24,108 @@ namespace Lab_1
         /// <summary>
         /// Массив координат исходной функции
         /// </summary>
-        private static PointF[] OriginalPoint;
+        private static PointF[] _originalPoint;
         
         /// <summary>
         /// Массив координат множество Лагранжа
         /// </summary>
-        private static PointF[] LagrangePoint;
-
-        private static PointF[] LagrangePoint2;
+        private static PointF[] _lagrangePoint;        
 
         /// <summary>
         /// Массив узлов
         /// </summary>
-        private static List<double> XNode = new List<double>()
+        private static readonly List<double> XNode = new List<double>()
         {
-            Math.Round(0.5 * H, digits),
-            Math.Round(1.5 * H, digits),
-            Math.Round(2.5 * H, digits),
-            Math.Round(4.5 * H, digits),
-            Math.Round(6.5 * H, digits)
+            Math.Round(0.5 * H, Digits),
+            Math.Round(1.5 * H, Digits),
+            Math.Round(2.5 * H, Digits),
+            Math.Round(4.5 * H, Digits),
+            Math.Round(6.5 * H, Digits)
         };
 
         /// <summary>
         /// Исходная функция
         /// </summary>
-        /// <param name="x_i">значение х в итерации i</param>     
-        private static double Func(double x_i) =>
-            Math.Sqrt(x_i) * Math.Sin(x_i) + 1;
+        /// <param name="xI">значение х в итерации i</param>     
+        private static double Func(double xI) =>
+            Math.Sqrt(xI) * Math.Sin(xI) + 1;
 
         /// <summary>
         /// Базисные полиномы
         /// </summary>
-        /// <param name="x_i">значение х в итерации i</param>
+        /// <param name="xI">значение х в итерации i</param>
         /// <param name="i">номер полинома i</param>     
-        private static double L_i(double x_i, double i) =>
+        private static double BasicPolynomials(double xI, double i) =>
             i switch
             {
-                1 => (x_i - XNode[1]) / (XNode[0] - XNode[1]) * (x_i - XNode[2]) / (XNode[0] - XNode[2]) *
-                    (x_i - XNode[3]) / (XNode[0] - XNode[3]) * (x_i - XNode[4]) / (XNode[0] - XNode[4]),
-                2 => (x_i - XNode[0]) / (XNode[1] - XNode[0]) * (x_i - XNode[2]) / (XNode[1] - XNode[2]) *
-                    (x_i - XNode[3]) / (XNode[1] - XNode[3]) * (x_i - XNode[4]) / (XNode[1] - XNode[4]),
-                3 => (x_i - XNode[0]) / (XNode[2] - XNode[0]) * (x_i - XNode[1]) / (XNode[2] - XNode[1]) *
-                    (x_i - XNode[3]) / (XNode[2] - XNode[3]) * (x_i - XNode[4]) / (XNode[2] - XNode[4]),
-                4 => (x_i - XNode[0]) / (XNode[3] - XNode[0]) * (x_i - XNode[1]) / (XNode[3] - XNode[1]) *
-                    (x_i - XNode[2]) / (XNode[3] - XNode[2]) * (x_i - XNode[4]) / (XNode[3] - XNode[4]),
-                5 => (x_i - XNode[0]) / (XNode[4] - XNode[0]) * (x_i - XNode[1]) / (XNode[4] - XNode[1]) *
-                    (x_i - XNode[2]) / (XNode[4] - XNode[2]) * (x_i - XNode[3]) / (XNode[4] - XNode[3]),
+                1 => (xI - XNode[1]) / (XNode[0] - XNode[1]) * (xI - XNode[2]) / (XNode[0] - XNode[2]) *
+                    (xI - XNode[3]) / (XNode[0] - XNode[3]) * (xI - XNode[4]) / (XNode[0] - XNode[4]),
+                2 => (xI - XNode[0]) / (XNode[1] - XNode[0]) * (xI - XNode[2]) / (XNode[1] - XNode[2]) *
+                    (xI - XNode[3]) / (XNode[1] - XNode[3]) * (xI - XNode[4]) / (XNode[1] - XNode[4]),
+                3 => (xI - XNode[0]) / (XNode[2] - XNode[0]) * (xI - XNode[1]) / (XNode[2] - XNode[1]) *
+                    (xI - XNode[3]) / (XNode[2] - XNode[3]) * (xI - XNode[4]) / (XNode[2] - XNode[4]),
+                4 => (xI - XNode[0]) / (XNode[3] - XNode[0]) * (xI - XNode[1]) / (XNode[3] - XNode[1]) *
+                    (xI - XNode[2]) / (XNode[3] - XNode[2]) * (xI - XNode[4]) / (XNode[3] - XNode[4]),
+                5 => (xI - XNode[0]) / (XNode[4] - XNode[0]) * (xI - XNode[1]) / (XNode[4] - XNode[1]) *
+                    (xI - XNode[2]) / (XNode[4] - XNode[2]) * (xI - XNode[3]) / (XNode[4] - XNode[3]),
                 _ => 0
             };
 
         /// <summary>
         /// Функция записывающие в файлы данные формата json и csv. await Task.Delay(30) предназначена для гаранта закрытия потока на запись.
         /// </summary>
-        /// <param name="name_point">Имя записывающейся функции</param>
+        /// <param name="namePoint">Имя записывающейся функции</param>
         /// <param name="pointFs">Массив координат</param>
-        private static async Task WriteFiles(string name_point, PointF[] pointFs)
+        private static async Task WriteFiles(string namePoint, PointF[] pointFs)
         {
             int num = new Random().Next(0, 1001);
-            await File.WriteAllTextAsync($"{num}_{name_point}_file.json",
+            await File.WriteAllTextAsync($"{num}_{namePoint}_file.json",
                 JsonSerializer.Serialize(pointFs), Encoding.UTF8);            
             await Task.Delay(30);
 
-            await File.WriteAllTextAsync($"{num}_{name_point}_file.csv", string.Join("\n", pointFs.Select(s => $"{s.X};{s.Y}")));
+            await File.WriteAllTextAsync($"{num}_{namePoint}_file.csv", string.Join("\n", pointFs.Select(s => $"{s.X};{s.Y}")));
             
             await Task.Delay(30);
         }
         
         
         /// <summary>
-        /// Рабочая функция
+        /// Рабочая функция \sqrt {\х }
         /// </summary>      
-        static async Task Main(string[] args)
-        {
-            double[] xs_i = Enumerable
+        static async Task Main()
+        {            
+            double[] xsI = Enumerable
                 .Range(1, 100)
-                .Select(s => Math.Round(2 * Math.PI / 100 * s, digits))
-                .ToArray();/*Получение набора координат х*/
+                .Select(s => Math.Round(2 * Math.PI / 100 * s, Digits))
+                .ToArray();/*Получение набора координат х. 2π/100 * i. */
             
-            OriginalPoint = xs_i
-                .Select(s => new PointF((float) s, MathF.Round((float) Func(s), digits)))
+            _originalPoint = xsI
+                .Select(s => new PointF((float) s, MathF.Round((float) Func(s), Digits)))
                 .ToArray();/*Преобразования исходной функции к массиву координат*/
 
-            await WriteFiles("Original", OriginalPoint);            
+            await WriteFiles("Original", _originalPoint);
 
-            List<double> ys_i_2 =
-                xs_i
-                    .Select(x_i =>
-                        XNode.Sum(x_ij => Func(XNode[XNode.IndexOf(x_ij)]) * L_i(x_i, XNode.IndexOf(x_ij) + 1)))
-                    .ToList();
+            double[] ysI =
+                xsI
+                    .Select(xI =>
+                        XNode.Sum(xIj => 
+                            Func(XNode[XNode.IndexOf(xIj)]) * BasicPolynomials(xI, XNode.IndexOf(xIj) + 1)))
+                    .ToArray();
+            /*Технология LINQ.
+             Суть такова, что функция образается к каждому значению массива xsI и проводит над ним операции.
+             Произведение функции Func с аргументом от массива XNode по индексу от индекса массива XNode и 
+             функции BasicPolynomials с арг. массива xsI по индексу перебора, и арг. номера итерации от массива XNode.
+             Результат суммируется, и записывается в массив.
+             Функция ToArray() нужна для преобрахования из IEnumerable<double> в double[]*/
+                    
 
-            LagrangePoint =
+            _lagrangePoint =
                 Enumerable
-                    .Range(0, xs_i.Length)
-                    .Select(s => new PointF((float)xs_i[s], (float)ys_i_2[s]))
+                    .Range(0, xsI.Length)
+                    .Select(s => new PointF((float)xsI[s], (float)ysI[s]))
                     .ToArray();
 
-            await WriteFiles("Lagrange", LagrangePoint);
+            await WriteFiles("Lagrange", _lagrangePoint);
             
             Console.CursorVisible = false;
             Console.WriteLine("Program end work!\n\tPress Enter...");
