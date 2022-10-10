@@ -32,6 +32,8 @@ namespace Lab_1
         /// </summary>
         private static PointF[] LagrangePoint;
 
+        private static PointF[] LagrangePoint2;
+
         /// <summary>
         /// Массив узлов
         /// </summary>
@@ -104,20 +106,22 @@ namespace Lab_1
                 .Select(s => new PointF((float) s, MathF.Round((float) Func(s), digits)))
                 .ToArray();/*Преобразования исходной функции к массиву координат*/
 
-            await WriteFiles("Original", OriginalPoint);
+            await WriteFiles("Original", OriginalPoint);            
 
-            List<double> ys_i =
+            List<double> ys_i_2 =
                 xs_i
-                    .Select(x => Math.Round(XNode.Sum(x_ij => Func(x) * L_i(x, XNode.IndexOf(x_ij) + 1)), digits))
-                    .ToList();/*Нахождение приближеного значения по средством технологии LINQ*/      
-            
-            LagrangePoint = Enumerable
-                .Range(0, xs_i.Length)
-                .Select(s => new PointF((float) xs_i[s], (float) ys_i[s]))
-                .ToArray();/*Перобрахование приближенных значений в массив координат*/
+                    .Select(x_i =>
+                        XNode.Sum(x_ij => Func(XNode[XNode.IndexOf(x_ij)]) * L_i(x_i, XNode.IndexOf(x_ij) + 1)))
+                    .ToList();
+
+            LagrangePoint =
+                Enumerable
+                    .Range(0, xs_i.Length)
+                    .Select(s => new PointF((float)xs_i[s], (float)ys_i_2[s]))
+                    .ToArray();
 
             await WriteFiles("Lagrange", LagrangePoint);
-
+            
             Console.CursorVisible = false;
             Console.WriteLine("Program end work!\n\tPress Enter...");
             Console.ReadLine();
