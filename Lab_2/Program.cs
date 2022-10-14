@@ -50,26 +50,40 @@ namespace Lab_2
         private static double Func(double xI) =>
             Math.Sqrt(xI) * Math.Sin(xI) + 1;
 
-        // private static double BasicPolynomials(double i) =>
-        //     i switch
-        //     {
-        //         0 => (XNode[0] - XNode[1]) * (XNode[0] - XNode[2]) * (XNode[0] - XNode[3]) * (XNode[0] - XNode[4]),               
-        //         1 => (XNode[1] - XNode[0]) * (XNode[1] - XNode[2]) * (XNode[1] - XNode[3]) * (XNode[1] - XNode[4]),
-        //         2 => (XNode[2] - XNode[0]) * (XNode[2] - XNode[1]) * (XNode[2] - XNode[3]) * (XNode[0] - XNode[4]),
-        //         3 => (XNode[3] - XNode[0]) * (XNode[3] - XNode[1]) * (XNode[3] - XNode[2]) * (XNode[0] - XNode[4]),
-        //         4 => (XNode[4] - XNode[0]) * (XNode[4] - XNode[1]) * (XNode[4] - XNode[2]) * (XNode[4] - XNode[3]),
-        //         _ => 0
-        //     };
+        /// <summary>
+        /// (xj-xi)*...
+        /// </summary>
+        /// <param name="Xi">значение узла</param>
+        /// <param name="count">номер шага</param>
+        /// <returns></returns>
+        private static double BasicPolynomials(double Xi, int count) =>
+            XNode
+                .Where(w => w != Xi)
+                .Take(count)
+                .Aggregate<double, double>(1, (current, v) =>
+                    current * (XNode.FirstOrDefault(f => f == Xi) - v));
 
-        private static double BasicPolynom(double Xi, int count) =>
-            XNode.Take(count)
-                .Aggregate<double, double>(1, (current, v) => current * (XNode.FirstOrDefault(f => f == Xi) - v));
-        
 
-        private static double DividedDifference(params double[] args) =>
-            args.Sum(s => Func(s) / BasicPolynomials(args.Length - 1));
-        
-            
+        /// <summary>
+        /// Sum f(xj)/(xj-xi)
+        /// </summary>
+        /// <param name="Xi">значение узла</param>
+        /// <param name="j">номер шага</param>
+        private static double Part_1(double Xi, int j) =>
+            XNode
+                .Where(w => w <= Xi)
+                .Sum(s => Func(s) / BasicPolynomials(s, j));
+
+        /// <summary>
+        /// (x-x0)*(x-x1)* ... *(x-xn-1)
+        /// </summary>
+        /// <param name="x">Значение Х</param>
+        /// <param name="take">N-1</param>
+        private static double Part_2(double x, int take) =>
+            XNode
+                .Take(take)
+                .Aggregate<double, double>(1, (c, v) =>
+                    c * (x - v));
         
         
         /// <summary>
@@ -102,40 +116,22 @@ namespace Lab_2
 
             await WriteFiles("Original", _originalPoint);
 
-            // double[] ysI = xsI
-            //     .Select(xI =>
-            //         XNode.Sum(xIJ =>
-            //             Func(XNode[0]) +
-            //             DividedDifference(XNode[0], XNode[1]) * (xI - XNode[0]) +
-            //             DividedDifference(XNode[0], XNode[1], XNode[2]) * (xI - XNode[0]) * (xI - XNode[1]) +
-            //             DividedDifference(XNode[0], XNode[1], XNode[2], XNode[3]) * (xI - XNode[0]) * (xI - XNode[1]) * (xI - XNode[2]) + 
-            //             DividedDifference(XNode[0], XNode[1], XNode[2], XNode[3], XNode[4]) * (xI - XNode[0]) * (xI - XNode[1]) * (xI - XNode[2]) * (xI - XNode[3])
-            //         ))
-            //     .ToArray();
-
-
-            List<double> ys = new List<double>();
-            foreach (double x in xsI)
-            {
-                double y =
-                    Func(XNode[0]) +
-                    (((Func(XNode[0]) / (XNode[0] - XNode[1])) + (Func(XNode[1]) / (XNode[1] - XNode[0]))) *(x - XNode[0])) + 
-                    
-
-                
-
-
-            }
-
-            double y1 = XNode.Take(3).Aggregate((x,y)=>XNode[0]-)
-
-
+            double[] ysI =
+                xsI
+                    .Select(x =>
+                        XNode[0] +
+                        Part_1(XNode[1], 1) * Part_2(x, 1) +
+                        Part_1(XNode[2], 2) * Part_2(x, 2) +
+                        Part_1(XNode[3], 3) * Part_2(x, 3) +
+                        Part_1(XNode[4], 4) * Part_2(x, 4))
+                    .ToArray();
+            
             _newtonPoint =
                 Enumerable
                     .Range(0, xsI.Length)
                     .Select(s => new PointF((float)xsI[s], (float)ysI[s]))
                     .ToArray();
-
+            
             await WriteFiles("Newton", _newtonPoint);
             
             Console.CursorVisible = false;

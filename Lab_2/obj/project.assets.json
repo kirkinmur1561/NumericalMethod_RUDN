@@ -8,25 +8,25 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\muratovka-1\\.nuget\\packages\\": {},
-    "E:\\Program\\VS\\SDK\\NuGetPackages": {},
+    "C:\\Users\\Кирилл\\.nuget\\packages\\": {},
+    "S:\\VS_SDK\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Project\\C#\\NumericalMethod_RUDN\\Lab_2\\Lab_2.csproj",
+      "projectUniqueName": "S:\\ReposProject\\NumericalMethod_RUDN\\Lab_2\\Lab_2.csproj",
       "projectName": "Lab_2",
-      "projectPath": "E:\\Project\\C#\\NumericalMethod_RUDN\\Lab_2\\Lab_2.csproj",
-      "packagesPath": "C:\\Users\\muratovka-1\\.nuget\\packages\\",
-      "outputPath": "E:\\Project\\C#\\NumericalMethod_RUDN\\Lab_2\\obj\\",
+      "projectPath": "S:\\ReposProject\\NumericalMethod_RUDN\\Lab_2\\Lab_2.csproj",
+      "packagesPath": "C:\\Users\\Кирилл\\.nuget\\packages\\",
+      "outputPath": "S:\\ReposProject\\NumericalMethod_RUDN\\Lab_2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "E:\\Program\\VS\\SDK\\NuGetPackages",
+        "S:\\VS_SDK\\NuGetPackages",
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet"
       ],
       "configFilePaths": [
-        "C:\\Users\\muratovka-1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Кирилл\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -36,7 +36,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -64,12 +63,18 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[5.0.12, 5.0.12]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

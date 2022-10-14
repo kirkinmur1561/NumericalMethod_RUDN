@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "k9HqlW/U+tOpgtlyIJKPtHK2jbBX7QC3s85JB5KA9phQ98vGVAa0HAJf3nh5gnJezvCPq/RG08Hgs+zNmxFZUg==",
+  "dgSpecHash": "Jmto4jg4h/AGeQBMet1YtC6HnBK/FIpr8sERmOA3CjjbGmZtdsJt9/u2b0VtC3JuMkV/Iy5YU71E17Dary6VCg==",
   "success": true,
-  "projectFilePath": "E:\\Project\\C#\\NumericalMethod_RUDN\\Lab_1\\Lab_1.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "S:\\ReposProject\\NumericalMethod_RUDN\\Lab_1\\Lab_1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Кирилл\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.12\\microsoft.netcore.app.host.win-x64.5.0.12.nupkg.sha512"
+  ],
   "logs": []
 }
