@@ -34,7 +34,7 @@ namespace Lab_2
         /// <summary>
         /// Массив узлов
         /// </summary>
-        private static readonly List<double> XNode = new List<double>()
+        private static readonly List<double> XNode = new()
         {
             Math.Round(0.5 * H, Digits),//X0
             Math.Round(1.5 * H, Digits),//X1
