@@ -1,0 +1,16 @@
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\bin\Debug\net5.0\Lab_2.exe
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\bin\Debug\net5.0\Lab_2.deps.json
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\bin\Debug\net5.0\Lab_2.runtimeconfig.json
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\bin\Debug\net5.0\Lab_2.runtimeconfig.dev.json
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\bin\Debug\net5.0\Lab_2.dll
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\bin\Debug\net5.0\ref\Lab_2.dll
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\bin\Debug\net5.0\Lab_2.pdb
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\obj\Debug\net5.0\Lab_2.csproj.AssemblyReference.cache
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\obj\Debug\net5.0\Lab_2.GeneratedMSBuildEditorConfig.editorconfig
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\obj\Debug\net5.0\Lab_2.AssemblyInfoInputs.cache
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\obj\Debug\net5.0\Lab_2.AssemblyInfo.cs
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\obj\Debug\net5.0\Lab_2.csproj.CoreCompileInputs.cache
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\obj\Debug\net5.0\Lab_2.dll
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\obj\Debug\net5.0\ref\Lab_2.dll
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\obj\Debug\net5.0\Lab_2.pdb
+S:\ReposProject\NumericalMethod_RUDN\Lab_2\obj\Debug\net5.0\Lab_2.genruntimeconfig.cache

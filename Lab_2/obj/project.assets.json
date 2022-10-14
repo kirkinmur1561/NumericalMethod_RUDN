@@ -15,11 +15,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "S:\\ReposProject\\NumericalMethod_RUDN\\Lab_1\\Lab_1.csproj",
-      "projectName": "Lab_1",
-      "projectPath": "S:\\ReposProject\\NumericalMethod_RUDN\\Lab_1\\Lab_1.csproj",
+      "projectUniqueName": "S:\\ReposProject\\NumericalMethod_RUDN\\Lab_2\\Lab_2.csproj",
+      "projectName": "Lab_2",
+      "projectPath": "S:\\ReposProject\\NumericalMethod_RUDN\\Lab_2\\Lab_2.csproj",
       "packagesPath": "C:\\Users\\Кирилл\\.nuget\\packages\\",
-      "outputPath": "S:\\ReposProject\\NumericalMethod_RUDN\\Lab_1\\obj\\",
+      "outputPath": "S:\\ReposProject\\NumericalMethod_RUDN\\Lab_2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "S:\\VS_SDK\\NuGetPackages",
