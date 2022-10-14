@@ -36,11 +36,11 @@ namespace Lab_2
         /// </summary>
         private static readonly List<double> XNode = new List<double>()
         {
-            Math.Round(0.5 * H, Digits),
-            Math.Round(1.5 * H, Digits),
-            Math.Round(2.5 * H, Digits),
-            Math.Round(4.5 * H, Digits),
-            Math.Round(6.5 * H, Digits)
+            Math.Round(0.5 * H, Digits),//X0
+            Math.Round(1.5 * H, Digits),//X1
+            Math.Round(2.5 * H, Digits),//X2
+            Math.Round(4.5 * H, Digits),//X3
+            Math.Round(6.5 * H, Digits) //X4
         };
 
         /// <summary>
@@ -50,16 +50,21 @@ namespace Lab_2
         private static double Func(double xI) =>
             Math.Sqrt(xI) * Math.Sin(xI) + 1;
 
-        private static double BasicPolynomials(double i) =>
-            i switch
-            {
-                0 => (XNode[0] - XNode[1]) * (XNode[0] - XNode[2]) * (XNode[0] - XNode[3]) * (XNode[0] - XNode[4]),
-                1 => (XNode[1] - XNode[0]) * (XNode[1] - XNode[2]) * (XNode[1] - XNode[3]) * (XNode[1] - XNode[4]),
-                2 => (XNode[2] - XNode[0]) * (XNode[2] - XNode[1]) * (XNode[2] - XNode[3]) * (XNode[0] - XNode[4]),
-                3 => (XNode[3] - XNode[0]) * (XNode[3] - XNode[1]) * (XNode[3] - XNode[2]) * (XNode[0] - XNode[4]),
-                4 => (XNode[4] - XNode[0]) * (XNode[4] - XNode[1]) * (XNode[4] - XNode[2]) * (XNode[4] - XNode[3]),
-                _ => 0
-            };
+        // private static double BasicPolynomials(double i) =>
+        //     i switch
+        //     {
+        //         0 => (XNode[0] - XNode[1]) * (XNode[0] - XNode[2]) * (XNode[0] - XNode[3]) * (XNode[0] - XNode[4]),               
+        //         1 => (XNode[1] - XNode[0]) * (XNode[1] - XNode[2]) * (XNode[1] - XNode[3]) * (XNode[1] - XNode[4]),
+        //         2 => (XNode[2] - XNode[0]) * (XNode[2] - XNode[1]) * (XNode[2] - XNode[3]) * (XNode[0] - XNode[4]),
+        //         3 => (XNode[3] - XNode[0]) * (XNode[3] - XNode[1]) * (XNode[3] - XNode[2]) * (XNode[0] - XNode[4]),
+        //         4 => (XNode[4] - XNode[0]) * (XNode[4] - XNode[1]) * (XNode[4] - XNode[2]) * (XNode[4] - XNode[3]),
+        //         _ => 0
+        //     };
+
+        private static double BasicPolynom(double Xi, int count) =>
+            XNode.Take(count)
+                .Aggregate<double, double>(1, (current, v) => current * (XNode.FirstOrDefault(f => f == Xi) - v));
+        
 
         private static double DividedDifference(params double[] args) =>
             args.Sum(s => Func(s) / BasicPolynomials(args.Length - 1));
@@ -97,19 +102,34 @@ namespace Lab_2
 
             await WriteFiles("Original", _originalPoint);
 
-            double[] ysI = xsI
-                .Select(xI =>
-                    XNode.Sum(xIJ =>
-                        DividedDifference(XNode[0]) +
-                        DividedDifference(XNode[0], XNode[1]) * (xI - XNode[0]) +
-                        DividedDifference(XNode[0], XNode[1], XNode[2]) * (xI - XNode[0]) * (xI - XNode[1]) +
-                        DividedDifference(XNode[0], XNode[1], XNode[2], XNode[3]) * (xI - XNode[0]) * (xI - XNode[1]) *
-                        (xI - XNode[2]) +
-                        DividedDifference(XNode[0], XNode[1], XNode[2], XNode[3], XNode[4]) * (xI - XNode[0]) *
-                        (xI - XNode[1]) * (xI - XNode[2]) * (xI - XNode[3])
-                    ))
-                .ToArray();
-            
+            // double[] ysI = xsI
+            //     .Select(xI =>
+            //         XNode.Sum(xIJ =>
+            //             Func(XNode[0]) +
+            //             DividedDifference(XNode[0], XNode[1]) * (xI - XNode[0]) +
+            //             DividedDifference(XNode[0], XNode[1], XNode[2]) * (xI - XNode[0]) * (xI - XNode[1]) +
+            //             DividedDifference(XNode[0], XNode[1], XNode[2], XNode[3]) * (xI - XNode[0]) * (xI - XNode[1]) * (xI - XNode[2]) + 
+            //             DividedDifference(XNode[0], XNode[1], XNode[2], XNode[3], XNode[4]) * (xI - XNode[0]) * (xI - XNode[1]) * (xI - XNode[2]) * (xI - XNode[3])
+            //         ))
+            //     .ToArray();
+
+
+            List<double> ys = new List<double>();
+            foreach (double x in xsI)
+            {
+                double y =
+                    Func(XNode[0]) +
+                    (((Func(XNode[0]) / (XNode[0] - XNode[1])) + (Func(XNode[1]) / (XNode[1] - XNode[0]))) *(x - XNode[0])) + 
+                    
+
+                
+
+
+            }
+
+            double y1 = XNode.Take(3).Aggregate((x,y)=>XNode[0]-)
+
+
             _newtonPoint =
                 Enumerable
                     .Range(0, xsI.Length)

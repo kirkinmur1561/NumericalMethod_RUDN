@@ -69,7 +69,7 @@ namespace Lab_1
                 5 => (xI - XNode[0]) / (XNode[4] - XNode[0]) * (xI - XNode[1]) / (XNode[4] - XNode[1]) *
                     (xI - XNode[2]) / (XNode[4] - XNode[2]) * (xI - XNode[3]) / (XNode[4] - XNode[3]),
                 _ => 0
-            };
+            };        
 
         /// <summary>
         /// Функция записывающие в файлы данные формата json и csv. await Task.Delay(30) предназначена для гаранта закрытия потока на запись.
