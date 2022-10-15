@@ -119,7 +119,7 @@ namespace Lab_2
             double[] ysI =
                 xsI
                     .Select(x =>
-                        XNode[0] +
+                        Func(XNode[0]) +
                         Part_1(XNode[1], 1) * Part_2(x, 1) +
                         Part_1(XNode[2], 2) * Part_2(x, 2) +
                         Part_1(XNode[3], 3) * Part_2(x, 3) +
