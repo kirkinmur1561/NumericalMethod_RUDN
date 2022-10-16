@@ -34,7 +34,8 @@ namespace Lab_3
             1 => DifferentialEquation(x, y),
             2 => DifferentialEquation(x + h / 2, y + h * RK4Order(1, x, y) / 2),
             3 => DifferentialEquation(x + h / 2, y + h * RK4Order(2, x, y) / 2),
-            4 => DifferentialEquation(x + h, y + h * RK4Order(3, x, y))
+            4 => DifferentialEquation(x + h, y + h * RK4Order(3, x, y)),
+            _ => throw new ArgumentOutOfRangeException(nameof(indexOrder), indexOrder, null)
         };
         
         /// <summary>
