@@ -98,26 +98,27 @@ namespace Lab_2
                 JsonSerializer.Serialize(pointFs), Encoding.UTF8);            
             await Task.Delay(30);
 
-            await File.WriteAllTextAsync($"{num}_{namePoint}_file.csv", string.Join("\n", pointFs.Select(s => $"{s.X};{s.Y}")));
+            await File.WriteAllTextAsync($"{num}_{namePoint}_file.csv", 
+                string.Join("\n", pointFs.Select(s => $"{s.X};{s.Y}")));
             
             await Task.Delay(30);
         }
         
         static async Task Main()
-        {
+        {           
             double[] xsI = Enumerable
-                .Range(1, 100)
+                .Range(1, 100)               
                 .Select(s => Math.Round(2 * Math.PI / 100 * s, Digits))
                 .ToArray();/*Получение набора координат х. 2π/100 * i. */
             
-            _originalPoint = xsI
+            _originalPoint = xsI               
                 .Select(s => new PointF((float) s, MathF.Round((float) Func(s), Digits)))
                 .ToArray();/*Преобразования исходной функции к массиву координат*/
 
             await WriteFiles("Original", _originalPoint);
 
             double[] ysI =
-                xsI
+                xsI                   
                     .Select(x =>
                         Func(XNode[0]) +
                         Part_1(XNode[1], 1) * Part_2(x, 1) +
@@ -128,12 +129,12 @@ namespace Lab_2
             
             _newtonPoint =
                 Enumerable
-                    .Range(0, xsI.Length)
+                    .Range(0, xsI.Length)                   
                     .Select(s => new PointF((float)xsI[s], (float)ysI[s]))
                     .ToArray();
             
             await WriteFiles("Newton", _newtonPoint);
-            
+          
             Console.CursorVisible = false;
             Console.WriteLine("Program end work!\n\tPress Enter...");
             Console.ReadLine();
