@@ -1,0 +1,16 @@
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\bin\Debug\net5.0\Lab_4.exe
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\bin\Debug\net5.0\Lab_4.deps.json
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\bin\Debug\net5.0\Lab_4.runtimeconfig.json
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\bin\Debug\net5.0\Lab_4.runtimeconfig.dev.json
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\bin\Debug\net5.0\Lab_4.dll
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\bin\Debug\net5.0\ref\Lab_4.dll
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\bin\Debug\net5.0\Lab_4.pdb
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\obj\Debug\net5.0\Lab_4.csproj.AssemblyReference.cache
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\obj\Debug\net5.0\Lab_4.GeneratedMSBuildEditorConfig.editorconfig
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\obj\Debug\net5.0\Lab_4.AssemblyInfoInputs.cache
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\obj\Debug\net5.0\Lab_4.AssemblyInfo.cs
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\obj\Debug\net5.0\Lab_4.csproj.CoreCompileInputs.cache
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\obj\Debug\net5.0\Lab_4.dll
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\obj\Debug\net5.0\ref\Lab_4.dll
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\obj\Debug\net5.0\Lab_4.pdb
+E:\Project\C#\NumericalMethod_RUDN\Lab_4\obj\Debug\net5.0\Lab_4.genruntimeconfig.cache

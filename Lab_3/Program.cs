@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,7 +9,7 @@ namespace Lab_3
 {
     class Program
     {
-        private const decimal h = 0.01m;
+        private const decimal H = 0.01m;
         private static decimal BasicFunc(decimal x) =>
             Math.Round(-(x * x * x) - 2, 4);
 
@@ -20,7 +18,7 @@ namespace Lab_3
 
         private static decimal[] Xs =
             Enumerable.Range(0, 101)
-                .Select(s => Math.Round(s * h, 2))
+                .Select(s => Math.Round(s * H, 2))
                 .ToArray();
 
         private static decimal[] Ys =
@@ -32,9 +30,9 @@ namespace Lab_3
             indexOrder switch
         {
             1 => DifferentialEquation(x, y),
-            2 => DifferentialEquation(x + h / 2, y + h * RK4Order(1, x, y) / 2),
-            3 => DifferentialEquation(x + h / 2, y + h * RK4Order(2, x, y) / 2),
-            4 => DifferentialEquation(x + h, y + h * RK4Order(3, x, y)),
+            2 => DifferentialEquation(x + H / 2, y + H * RK4Order(1, x, y) / 2),
+            3 => DifferentialEquation(x + H / 2, y + H * RK4Order(2, x, y) / 2),
+            4 => DifferentialEquation(x + H, y + H * RK4Order(3, x, y)),
             _ => throw new ArgumentOutOfRangeException(nameof(indexOrder), indexOrder, null)
         };
         
@@ -72,13 +70,13 @@ namespace Lab_3
             func[0] = DifferentialEquation(Xs[0], YsEuler[0]);
             
             decimal[] h_fucn = new decimal[Xs.Length];
-            h_fucn[0] = h * func[0];            
+            h_fucn[0] = H * func[0];            
 
             for (int index = 1; index < Xs.Length; index++)
             {
                 YsEuler[index] = Math.Round(YsEuler[index - 1] + h_fucn[index - 1], 5);
                 func[index] = Math.Round(DifferentialEquation(Xs[index], YsEuler[index]), 5);
-                h_fucn[index] = Math.Round(h * func[index], 5);
+                h_fucn[index] = Math.Round(H * func[index], 5);
             }
 
             await WriteFiles("Euler",
@@ -97,9 +95,9 @@ namespace Lab_3
             for (int index = 1; index < Xs.Length; index++)
             {
                 decimal val_func = DifferentialEquation(Xs[index - 1], Ys[index - 1]);
-                decimal _y = YsFandC[index - 1] + h * val_func;
+                decimal _y = YsFandC[index - 1] + H * val_func;
                 YsFandC[index] =
-                    Math.Round(YsFandC[index - 1] + h * ((val_func + DifferentialEquation(Xs[index], _y)) / 2), 5);
+                    Math.Round(YsFandC[index - 1] + H * ((val_func + DifferentialEquation(Xs[index], _y)) / 2), 5);
             }
 
 
@@ -118,7 +116,7 @@ namespace Lab_3
 
             for (int index = 1; index < Xs.Length; index++)
             {
-                YsRK[index] = Math.Round(YsRK[index - 1] + (h / 6) * (RK4Order(1, Xs[index - 1], YsRK[index - 1]) +
+                YsRK[index] = Math.Round(YsRK[index - 1] + (H / 6) * (RK4Order(1, Xs[index - 1], YsRK[index - 1]) +
                                                                       2 * RK4Order(2, Xs[index - 1], YsRK[index - 1]) +
                                                                       2 * RK4Order(3, Xs[index - 1], YsRK[index - 1]) +
                                                                       RK4Order(4, Xs[index - 1], YsRK[index - 1])), 5);
