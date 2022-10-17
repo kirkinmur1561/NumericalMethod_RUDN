@@ -60,14 +60,15 @@ namespace Lab_3
         {
             await WriteFiles("Origin", Enumerable
                 .Range(0, Xs.Length)
-                .Select(index => new PointD(Xs[index], Ys[index])).ToArray());
+                .Select(index => new PointD(Xs[index], Ys[index]))
+                .ToArray());
             
             #region Метод ломаных Эйлера
 
             decimal[] YsEuler = new decimal[Xs.Length];
             YsEuler[0] = -2m;
             
-            decimal[] func = new decimal[Xs.Length]; /*DifferentialEquation(Xs[0], YsEuler[0])*/;
+            decimal[] func = new decimal[Xs.Length];
             func[0] = DifferentialEquation(Xs[0], YsEuler[0]);
             
             decimal[] h_fucn = new decimal[Xs.Length];
@@ -89,6 +90,23 @@ namespace Lab_3
 
             #region Метод предиктор-корректор
 
+            decimal[] YsFandC = new decimal[Xs.Length];
+            YsFandC[0] = -2m;
+            
+
+            for (int index = 1; index < Xs.Length; index++)
+            {
+                decimal val_func = DifferentialEquation(Xs[index - 1], Ys[index - 1]);
+                decimal _y = YsFandC[index - 1] + h * val_func;
+                YsFandC[index] =
+                    Math.Round(YsFandC[index - 1] + h * ((val_func + DifferentialEquation(Xs[index], _y)) / 2), 5);
+            }
+
+
+            await WriteFiles("ForecastAndCorrection",
+                Enumerable.Range(0, Xs.Length)
+                    .Select(index => new PointD(Xs[index], YsFandC[index]))
+                    .ToArray());
             
 
             #endregion
@@ -109,7 +127,8 @@ namespace Lab_3
             await WriteFiles("Runge_Kutta",
                 Enumerable
                     .Range(0, Xs.Length)
-                    .Select(index => new PointD(Xs[index], YsRK[index])).ToArray());
+                    .Select(index => new PointD(Xs[index], YsRK[index]))
+            .ToArray());
             
             Console.CursorVisible = false;
             Console.WriteLine("Program end work!\n\tPress Enter...");
